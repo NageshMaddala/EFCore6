@@ -27,7 +27,7 @@ namespace CityInfo.API.Controllers
         //}
 
         [HttpGet("{id}")]
-        public ActionResult<CityDto> GetCity(int id)
+        public ActionResult<CityDto> GetCity([FromRoute] int id)
         {
             var cityToReturn = CitiesDataStore.Current.Cities.FirstOrDefault(c => c.Id == id);
 
