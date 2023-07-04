@@ -1,4 +1,6 @@
+using CityInfo.API.DbContexts;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
@@ -29,6 +31,8 @@ builder.Services.AddSwaggerGen();
 // Allows us to inject FileExtensionContentTypeProvider
 // This helper class automatically detects the contenttype based on the file at runtime!
 builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+builder.Services.AddDbContext<CityInfoContext>(
+    dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:CityInfoDBConnectionString"]));
 
 var app = builder.Build();
 
